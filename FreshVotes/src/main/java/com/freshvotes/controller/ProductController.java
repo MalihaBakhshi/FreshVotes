@@ -41,7 +41,7 @@ public class ProductController {
 	
 	@GetMapping("/products/{productId}")
 	public String product(@PathVariable Long productId, ModelMap model, HttpServletResponse response) throws NotFoundException, IOException {
-		Optional<Product> productOpt = productRepo.findById(productId);
+		Optional<Product> productOpt = productRepo.findByIdWithUser(productId);
 		if(productOpt.isPresent()) {
 			Product product = productOpt.get();
 			model.put("product", product);

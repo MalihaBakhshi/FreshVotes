@@ -1,9 +1,25 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>FreshVotes Home Page</title>
-	</head>
-	<body>
-		<h1>Welcome to FreshVotes</h1>
-	</body>
+<head>
+<title>FreshVotes Home Page</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="row" style="margin-top:2em;">
+			<div class="col">
+				<h1>Welcome to FreshVotes</h1>
+			</div>
+			<div class="col">
+				<button class="btn btn-primary float-right btn-lg" id="login">Login</button>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		let loginBtn=document.getElementById("login")
+		loginBtn.addEventListener('click',function(){
+			window.location.href='/login'
+		});
+	</script>
+</body>
 </html>
