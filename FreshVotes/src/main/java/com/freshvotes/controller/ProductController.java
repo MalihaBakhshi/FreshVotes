@@ -1,6 +1,7 @@
 package com.freshvotes.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,10 +27,16 @@ public class ProductController {
 	@Autowired
 	private ProductRepository productRepo;
 	
-	@GetMapping("/products")
-	public String getProducts(ModelMap model) {
+	@PostMapping("/products")
+	public String createProducts(@AuthenticationPrincipal User user) {
+		Product product=new Product();
 		
-		return "product";
+		product.setPublished(false);
+		product.setUser(user);
+		
+		product=productRepo.save(product);
+		
+		return "redirect:/products/"+product.getId();
 	}
 	
 	@GetMapping("/products/{productId}")
@@ -40,17 +47,13 @@ public class ProductController {
 			model.put("product", product);
 		}else {
 			response.sendError(HttpStatus.NOT_FOUND.value(),"Product with id "+productId+" was not found.");
-			return "product";
+			return "products";
 		}
 		return "product";
 	}
 	
-	@PostMapping("/products")
-	public String createProducts(@AuthenticationPrincipal User user) {
-		Product product=new Product();
-		
-		product.setPublished(false);
-		product.setUser(user);
+	@PostMapping("/products/{productId}")
+	public String saveProduct(@PathVariable Long productId, Product product){
 		
 		product=productRepo.save(product);
 		
