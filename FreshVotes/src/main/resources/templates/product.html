@@ -5,6 +5,7 @@
 <script th:replace="fragments/header :: headerElement"></script>
 </head>
 <body>
+	<div th:replace="fragments/header :: header"></div>
 	<div class="container" th:if="${product!=null}">
 		<h2>Product</h2>
 		<form action="" method="post">
