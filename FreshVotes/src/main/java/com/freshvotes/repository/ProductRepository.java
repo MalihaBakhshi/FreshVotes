@@ -9,12 +9,15 @@ import org.springframework.data.jpa.repository.Query;
 import com.freshvotes.domain.Product;
 import com.freshvotes.domain.User;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long>{
 
-	@Query("select p from Product p"+
-			" join fetch p.user"+
-			" where p.id=:id")
-	Optional<Product> findByIdWithUser(Long id);
-	
-	List<Product> findByUser(User user);
+  @Query("select p from Product p"
+      + " join fetch p.user"
+      + " where p.id = :id")
+  Optional<Product> findByIdWithUser(Long id);
+  
+  List<Product> findByUser(User user);
+  
+  // this will (roughly) create this SQL statement: select * from product where name = :name
+  Optional<Product> findByName(String name); 
 }
